@@ -1,0 +1,4 @@
+interface:
+  display_name: "XHS Article Cards"
+  short_description: "Generate Xiaohongshu-style 9:16 cards or short videos from text/URLs"
+  default_prompt: "Generate Xiaohongshu-style 9:16 assets from the provided text or URL: read webpages via CDP first, extract key points, then render either note cards or a release-style short video with mobile-friendly typography."

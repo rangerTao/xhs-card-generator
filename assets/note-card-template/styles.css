@@ -1,0 +1,162 @@
+:root {
+  --canvas-w: 1080px;
+  --canvas-h: 1920px;
+  --text: #1e1e1e;
+  --muted: #6b6b6b;
+  --accent: #ff4d6d;
+  --note-blue: #9ad9ff;
+  --paper: #fdfbf6;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #ffffff;
+  font-family: "PingFang SC", "Noto Sans SC", "Source Han Sans", "Hiragino Sans GB", sans-serif;
+}
+
+.card {
+  width: var(--canvas-w);
+  height: var(--canvas-h);
+  color: var(--text);
+}
+
+/* Note style */
+body.theme-note .card.note {
+  position: relative;
+  padding: 96px 96px 80px;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      #e8f1f8 0px,
+      #e8f1f8 2px,
+      transparent 2px,
+      transparent 48px
+    ),
+    var(--paper);
+}
+
+body.theme-note .date {
+  font-size: 36px;
+  letter-spacing: 1px;
+  font-weight: 600;
+  color: #2c2c2c;
+  margin-bottom: 48px;
+}
+
+body.theme-note .note-body {
+  position: relative;
+  padding: 18px 0 0;
+}
+
+body.theme-note .ink-bar {
+  position: absolute;
+  left: -12px;
+  right: -12px;
+  top: 18px;
+  height: 320px;
+  background: linear-gradient(90deg, #7ec8ff, #bde9ff);
+  border-radius: 12px;
+  opacity: 0.85;
+  filter: blur(0.2px);
+}
+
+body.theme-note .note-title {
+  position: relative;
+  margin: 0 0 20px 0;
+  font-size: 78px;
+  font-weight: 700;
+}
+
+body.theme-note .note-text {
+  position: relative;
+  margin: 0 0 14px 0;
+  font-size: 56px;
+  line-height: 1.25;
+  font-weight: 600;
+}
+
+body.theme-note .note-bullets {
+  margin-top: 40px;
+}
+
+body.theme-note .note-bullets ul {
+  list-style: "• ";
+  padding-left: 16px;
+  font-size: 40px;
+  line-height: 1.4;
+  margin: 0;
+  display: grid;
+  gap: 16px;
+}
+
+body.theme-note .note-footer {
+  position: absolute;
+  right: 96px;
+  bottom: 40px;
+  font-size: 34px;
+  color: #2c2c2c;
+}
+
+/* Bold style */
+body.theme-bold .card.bold {
+  padding: 90px 84px;
+  background: radial-gradient(circle at top left, #2b2e38, #0e1016 60%, #0a0b0f 100%);
+  color: #ffffff;
+}
+
+body.theme-bold .bold-header {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  font-size: 44px;
+  font-weight: 700;
+  margin-bottom: 48px;
+}
+
+body.theme-bold .pill {
+  background: #ff4d6d;
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-size: 36px;
+  font-weight: 700;
+}
+
+body.theme-bold .headline {
+  font-size: 52px;
+  font-weight: 700;
+}
+
+body.theme-bold .bold-body {
+  background: #f0e6d3;
+  color: #1e1e1e;
+  border-radius: 34px;
+  padding: 52px 50px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+body.theme-bold .bold-line {
+  font-size: 44px;
+  font-weight: 700;
+  margin: 0 0 26px 0;
+}
+
+body.theme-bold .bold-list {
+  margin: 0;
+  padding-left: 24px;
+  display: grid;
+  gap: 22px;
+  font-size: 40px;
+  line-height: 1.35;
+  font-weight: 700;
+}
+
+body.theme-bold .bold-footer {
+  margin-top: 44px;
+  font-size: 36px;
+  color: #d2d2d2;
+}
