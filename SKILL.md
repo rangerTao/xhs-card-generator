@@ -1,30 +1,29 @@
 ---
 name: xhs-card-generator
-description: Generate Xiaohongshu (小红书) style 9:16 assets from text blocks or URLs: note-card images and release-style short videos. Use when users want shareable XHS cards, key-point extraction, and optional webpage reading via Chrome DevTools Protocol (CDP) before rendering.
+description: Generate Xiaohongshu (小红书) 9:16 assets from text or URLs: note-card images and release-style short videos. Use when users need XHS-ready visuals, key-point extraction via CDP, and direct rendering outputs.
 ---
 
 # XHS Card Generator
 
 ## Overview
-Create 1 to multiple 9:16 note-style assets that look native to Xiaohongshu:
+This skill supports two deliverables:
 - image cards (single or multi-card)
-- short release videos (Remotion)
+- release videos (Remotion 9:16)
 
-When given a URL, open it via Chrome DevTools Protocol (CDP), extract the main content, summarize key points, then render.
+Input can be plain text or URL. For URL input, use CDP browser extraction first, then summarize and render.
 
 ## Workflow Decision Tree
-- Input is URL: use CDP browser session to open, extract content, then continue.
-- Input is plain text: skip browsing and continue.
-- Need image cards: use a cover + key points sequence.
-- Need short video: use Remotion 9:16 scene sequence (cover + section pages).
+- Input is URL: extract with CDP, then continue.
+- Input is plain text: normalize and continue.
+- Need image output: run image-card path.
+- Need video output: run release-video path.
 
-## Step 1: Ingest Source
-- If input is a URL, connect to Chrome via CDP (not HTTP-only fetch).
-- Wait for network idle and ensure visible body content is loaded.
-- Extract title, headings, and main article text; ignore nav/ads/comments.
-- Save a short source summary (2-4 sentences) for internal planning.
+## Step 1: Ingest Source (CDP Required for URL)
+- If input is URL, connect Chrome via CDP (not plain HTTP fetch).
+- Wait for content load, extract title/headings/body, strip nav/ads/comments.
+- Save a short 2-4 sentence source summary for planning.
 - If input is text, normalize whitespace and remove obvious noise.
-- If CDP connection fails, provide configuration guidance (launch command, debug port, profile isolation), then retry.
+- If CDP fails, guide user to configure debug port/profile and retry.
 
 Recommended command:
 
@@ -32,101 +31,122 @@ Recommended command:
 node scripts/extract_via_cdp.js --url "<URL>" --out /tmp/extracted.json
 ```
 
-See `references/playwright_extraction.md` for a minimal, reliable extraction pattern.
+See `references/playwright_extraction.md` for details.
 
 ## Step 2: Summarize and Outline
 - Produce a short title (6-14 Chinese chars or concise bilingual).
 - Produce 3-8 key points.
-- Optional: 3-5 step list or checklist if the content is procedural.
-- Identify 1-2 quotable highlights to emphasize in large type.
-- Keep each card focused on a single idea; avoid dense paragraphs.
+- Optional: 3-5 step list/checklist for procedural content.
+- Identify 1-2 quotable highlights for emphasis.
+- Keep each page focused on one idea; avoid dense paragraphs.
 
-See `references/content_outline.md` for outline templates.
+See `references/content_outline.md`.
 
-## Step 3: Card Plan
-- Decide card count based on density:
-- Short content: 1-2 cards.
-- Medium: 3-5 cards.
-- Long: 6-8 cards (cap at 9 unless asked).
-- Use a consistent sequence:
-- Card 1: cover/title + subtitle + 1-2 highlights.
-- Middle: key points, steps, tips, examples.
-- Final: summary + CTA (e.g., 收藏/关注/评论引导).
+## Path A: Image Cards
 
-## Step 4: Layout and Style (XHS Note Style)
-- 9:16 ratio (1080x1920) with generous margins.
-- Use a handwritten/note vibe: large title, bold highlights, small bullet list.
-- Prefer light backgrounds, soft blocks, and colored tags.
-- Use 2-3 accent colors max; avoid heavy gradients.
-- Keep text readable: strong hierarchy (Title > Highlight > Body).
-- Avoid overfilling; each card should have 40-65% whitespace.
+### Card Plan
+- Card count by density:
+- short: 1-2
+- medium: 3-5
+- long: 6-8 (cap at 9 unless asked)
+- Sequence:
+- cover/title
+- key points / steps / tips
+- summary + CTA
 
-See `references/xhs_style_guide.md` for concrete layout rules.
+### Layout and Style
+- 9:16 (`1080x1920`) with generous margins.
+- XHS note vibe: clear title hierarchy, highlight block, concise bullets.
+- Keep 40-65% whitespace.
 
-## Step 5A: Render Images
-- Use the HTML/CSS template in `assets/note-card-template/`.
-- Replace placeholders with the card plan content.
-- Render each card to PNG at 1080x1920.
-- Use `scripts/render_cards.py` to render JSON -> PNG via Playwright.
+### Render
 
-### JSON schema for rendering
-```json
-{
-  "cards": [
-    {
-      "title": "标题",
-      "subtitle": "一句话副标题",
-      "highlight": "强调句",
-      "bullets": ["要点1", "要点2", "要点3"],
-      "tags": ["标签1", "标签2"],
-      "theme": "note",
-      "cta": "收藏备用"
-    }
-  ]
-}
-```
-
-### Render command
 ```bash
 python3 scripts/render_cards.py --data /path/to/cards.json --out /path/to/output
 ```
 
-## Step 5B: Render Video (when user asks for video)
-- Use Remotion format from the `remotion-9x16-release` skill when available.
-- Keep 9:16 (`1080x1920`) and middle 2/3 content-safe area visually centered.
-- Prefer one premium gradient theme for the whole video by default.
-- If user wants more variation, allow scene-level theme rotation.
-- Section bullet text must use mobile-friendly spacing and card-like rows.
-- Avoid blank/pure-background opening frames at scene transitions.
+Output example: `card-01.png`, `card-02.png`.
 
-Before full render, output still previews for confirmation:
+## Path B: Release Video (Merged from remotion-9x16-release)
+
+Use the bundled scaffold and template in this skill directly.
+
+### Quick Start
+1. Scaffold into a Remotion project:
+
+```bash
+scripts/scaffold_release_video.sh --project "<PROJECT_ROOT>" --force
+```
+
+2. Edit content in `src/MainVideo.tsx`.
+3. Keep composition as `1080x1920` and centered middle 2/3 safe area.
+4. Render still previews before full render:
 
 ```bash
 npx remotion still src/index.ts ReleaseVideo9x16 dist/preview-cover.jpg --frame=60 --image-format=jpeg
 npx remotion still src/index.ts ReleaseVideo9x16 dist/preview-section.jpg --frame=180 --image-format=jpeg
 ```
 
-Then render full video:
+5. Render final video:
 
 ```bash
 npx remotion render src/index.ts ReleaseVideo9x16 dist/output.mp4 --codec=h264 --crf=20
 ```
 
+### Required Layout Rules
+1. Keep all meaningful content in the middle 2/3 vertical safe area and visually centered.
+2. Default background: premium gradient with subtle glow (avoid flat solid colors).
+3. Theme strategy:
+- default: one unified theme for all scenes
+- optional: rotate scene themes when user asks
+4. Use consistent scene grammar:
+- icon
+- title
+- divider line
+- 3-5 bullet items
+5. Bullet typography should be mobile-readable:
+- rounded mini-card rows
+- adequate line-height and spacing
+- optional highlight for mixed English tokens
+6. Motion should stay simple (fade + slight translate).
+7. Avoid blank background-only opening frames at scene boundaries.
+
+### Default Scene Pattern
+1. Cover: product name + version + 2-3 highlight cards
+2. Section A
+3. Section B
+4. Section C
+5. Section D
+
+If content is shorter, reduce to 3-4 scenes but keep same pattern.
+
+### QA Checklist
+- No pure background-only scene at transitions.
+- Cover and sections are vertically centered in 9:16.
+- Bullet text is readable on mobile and not cramped.
+- Theme selection matches user intent (single palette or scene variation).
+
 ## Output Rules
-- For image mode: provide numbered files (e.g., `card-01.png`, `card-02.png`).
-- For video mode: provide final `.mp4` and 1-2 preview stills used for confirmation.
-- If only text output is possible, return HTML/CSS (or Remotion code) plus a clear render command.
+- Image mode: return numbered PNG files.
+- Video mode: return final MP4 + preview stills.
+- If not rendered, return runnable commands and required files.
 
 ## Resources
 
 ### references/
-- `references/playwright_extraction.md` — URL extraction checklist + CDP connection snippet.
-- `references/content_outline.md` — outline templates and length heuristics.
-- `references/xhs_style_guide.md` — typography and layout rules.
-- `references/release_video_guidelines.md` — video-specific style and QA checklist.
+- `references/playwright_extraction.md` — CDP extraction + troubleshooting.
+- `references/content_outline.md` — outline templates.
+- `references/xhs_style_guide.md` — XHS style rules.
+- `references/release_video_guidelines.md` — release video checklist.
+- `references/remotion-9x16-release/layout-spec.md` — merged layout spec.
+- `references/remotion-9x16-release/merged-source-skill.md` — merged source instructions snapshot.
+- `references/remotion-9x16-release/openai.yaml` — merged UI metadata snapshot.
 
 ### assets/
-- `assets/note-card-template/` — HTML/CSS 9:16 note-card templates (`note.html`, `bold.html`) + `styles.css`.
+- `assets/note-card-template/` — note-card HTML/CSS templates.
+- `assets/remotion-9x16-release-template/src/` — full Remotion template (Root/Main/scenes).
+
 ### scripts/
-- `scripts/render_cards.py` — Render JSON card data to PNG via Playwright.
-- `scripts/extract_via_cdp.js` — Extract webpage content via Chrome DevTools Protocol (CDP).
+- `scripts/extract_via_cdp.js` — webpage extraction via CDP.
+- `scripts/render_cards.py` — JSON card render to PNG.
+- `scripts/scaffold_release_video.sh` — scaffold release video template into Remotion project.

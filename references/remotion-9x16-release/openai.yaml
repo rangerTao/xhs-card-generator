@@ -1,0 +1,4 @@
+interface:
+  display_name: "Remotion 9:16 Release"
+  short_description: "Create 9:16 release videos with centered 2/3 layout and premium themes."
+  default_prompt: "Create or refactor this Remotion project to the 9:16 release format with a centered 2/3 content-safe area, readable section cards, and a premium gradient background theme."

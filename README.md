@@ -4,6 +4,7 @@
 - 图文卡片（1-N 张）
 - 版本更新短视频（Remotion 风格）
 - URL 内容提取（通过 Chrome DevTools Protocol, CDP）
+- 已内置 `remotion-9x16-release` 全量模板与规则（已合并到本 skill）
 
 ## 能力概览
 
@@ -17,8 +18,10 @@
 - `SKILL.md`：技能入口说明
 - `references/`：提取、排版、视频规范
 - `assets/note-card-template/`：卡片 HTML/CSS 模板
+- `assets/remotion-9x16-release-template/src/`：视频模板（Root/Main/scenes）
 - `scripts/render_cards.py`：JSON -> PNG 渲染
 - `scripts/extract_via_cdp.js`：CDP 网页内容提取
+- `scripts/scaffold_release_video.sh`：一键注入 Remotion 视频模板
 
 ## 快速使用
 
@@ -48,7 +51,14 @@ python3 scripts/render_cards.py --data /path/to/cards.json --out /path/to/output
 
 视频流程规范见：
 - `references/release_video_guidelines.md`
-- `SKILL.md` 中 “Step 5B: Render Video”
+- `references/remotion-9x16-release/layout-spec.md`
+- `SKILL.md` 中 “Path B: Release Video”
+
+将模板注入到现有 Remotion 项目：
+
+```bash
+scripts/scaffold_release_video.sh --project "<你的Remotion项目路径>" --force
+```
 
 ## 说明
 
