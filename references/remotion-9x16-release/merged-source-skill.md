@@ -21,7 +21,7 @@ scripts/scaffold_release_video.sh --project "<PROJECT_ROOT>"
 ```
 
 2. Edit update content in:
-- `src/MainVideo.tsx` (version text, section intro, and key points)
+- `src/MainVideo.tsx` (module summary points + top-2 detail explanations)
 
 3. Keep the layout constraints unchanged:
 - `src/Root.tsx`: `width=1080`, `height=1920`
@@ -53,9 +53,11 @@ Apply these rules unless the user explicitly requests a different style:
 4. Use one visual grammar across scenes:
    - icon
    - title
-   - intro sentence
    - short divider line
-   - 1-2 key bullet items
+   - important points list (N)
+5. Follow each summary scene with a detail scene:
+   - 重要更新点1详解
+   - 重要更新点2详解
 5. Optimize section bullet typography:
    - each bullet as a rounded mini-card
    - stronger line-height and spacing for mobile readability
@@ -68,10 +70,10 @@ Apply these rules unless the user explicitly requests a different style:
 Use this 5-page structure by default:
 
 1. Cover: product name + version + 2-3 highlight cards.
-2. Section A: intro + top 1-2 model/engine updates.
-3. Section B: intro + top 1-2 mobile/client updates.
-4. Section C: intro + top 1-2 integration/platform updates.
-5. Section D: intro + top 1-2 stability/security updates.
+2. Section A summary: 模块标题 + 重要更新点1..N.
+3. Section A detail: 重要更新点1详解 + 重要更新点2详解.
+4. Section B summary: 模块标题 + 重要更新点1..N.
+5. Section B detail: 重要更新点1详解 + 重要更新点2详解.
 
 If the user has fewer topics, keep the same visual pattern and reduce to 3-4 pages.
 

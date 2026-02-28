@@ -10,12 +10,15 @@
 - Prefer premium gradient backgrounds with subtle glow layers.
 - Default strategy: one unified palette across the full video.
 - Optional strategy: rotate themes per scene if user asks.
-- Keep section card style consistent: icon, title, intro sentence, divider, 1-2 key bullet rows.
+- Keep module scene style consistent:
+- summary scene: icon, module title, important points list (N)
+- detail scene: top 2 points with short explanations
 
 ## Typography
 - Prioritize mobile readability (large type + clear line-height).
-- Each update point should first explain context in one sentence, then show 1-2 most important points.
-- Section bullets should use rounded mini-card rows, not dense raw lists.
+- Summary scene: show concise list only (no dense paragraph).
+- Detail scene: each point has a title + 1 sentence explanation.
+- List and detail rows should use rounded mini-cards for scan speed.
 - Mixed English tokens in Chinese lines can be highlighted for scannability.
 
 ## Motion

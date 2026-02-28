@@ -39,9 +39,9 @@ See `references/playwright_extraction.md` for details.
 - Optional: 3-5 step list/checklist for procedural content.
 - Identify 1-2 quotable highlights for emphasis.
 - Keep each page focused on one idea; avoid dense paragraphs.
-- For video pages, each update point must include:
-- one short intro sentence (what changed + why it matters)
-- 1-2 most important points only (avoid long bullet lists)
+- For video modules, use a two-step narrative:
+- scene 1: module title + important points list (`重要更新点1..N`)
+- scene 2: top points detail (`重要更新点1详解`, `重要更新点2详解`)
 
 See `references/content_outline.md`.
 
@@ -105,24 +105,26 @@ npx remotion render src/index.ts ReleaseVideo9x16 dist/output.mp4 --codec=h264 -
 4. Use consistent scene grammar:
 - icon
 - title
-- intro sentence
 - divider line
-- 1-2 key bullet items
-5. Bullet typography should be mobile-readable:
+- important points list (N items)
+5. Add a follow-up detail scene for the same module:
+- detail card 1: 重要更新点1详解
+- detail card 2: 重要更新点2详解
+6. Bullet typography should be mobile-readable:
 - rounded mini-card rows
 - adequate line-height and spacing
 - optional highlight for mixed English tokens
-6. Motion should stay simple (fade + slight translate).
-7. Avoid blank background-only opening frames at scene boundaries.
+7. Motion should stay simple (fade + slight translate).
+8. Avoid blank background-only opening frames at scene boundaries.
 
 ### Default Scene Pattern
 1. Cover: product name + version + 2-3 highlight cards
-2. Section A (intro + top 1-2 points)
-3. Section B (intro + top 1-2 points)
-4. Section C (intro + top 1-2 points)
-5. Section D (intro + top 1-2 points)
+2. Section A summary: 模块标题 + 重要更新点1..N
+3. Section A detail: 重要更新点1详解 + 重要更新点2详解
+4. Section B summary: 模块标题 + 重要更新点1..N
+5. Section B detail: 重要更新点1详解 + 重要更新点2详解
 
-If content is shorter, reduce to 3-4 scenes but keep same pattern.
+If content is shorter, keep the same "summary -> detail" pair pattern and reduce module count.
 
 ### QA Checklist
 - No pure background-only scene at transitions.

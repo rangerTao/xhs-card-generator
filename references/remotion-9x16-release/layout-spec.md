@@ -35,8 +35,8 @@
 - Use bold sans-serif CJK-friendly stack.
 - Cover main title: very large and heavy.
 - Section title: prominent, single line preferred.
-- Each section should include one short intro sentence below title.
-- Bullet text: keep only 1-2 most important points per section.
+- Summary scene: module title + important points list (N).
+- Detail scene: only top 2 points with short explanations.
 
 ## Motion
 

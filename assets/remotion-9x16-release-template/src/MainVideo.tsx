@@ -1,12 +1,43 @@
 import React from "react";
 import { AbsoluteFill, Sequence } from "remotion";
 import { ReleaseCoverScene } from "./scenes/ReleaseCoverScene";
+import { ReleaseDetailScene } from "./scenes/ReleaseDetailScene";
 import { ReleaseBackgroundTheme } from "./scenes/ReleaseLayout";
 import { ReleaseSectionScene } from "./scenes/ReleaseSectionScene";
 
-export const MainVideo: React.FC = () => {
-  const sceneDuration = 120;
+type ModuleData = {
+  icon: string;
+  title: string;
+  points: string[];
+  details: { title: string; detail: string }[];
+};
 
+export const SCENE_DURATION = 120;
+
+const modules: ModuleData[] = [
+  {
+    icon: "🤖",
+    title: "模块标题 A",
+    points: ["重要更新点1", "重要更新点2", "重要更新点3"],
+    details: [
+      { title: "重要更新点1详解", detail: "这里写变更背景、核心能力和用户收益。" },
+      { title: "重要更新点2详解", detail: "这里写适用场景、使用方式或性能提升幅度。" },
+    ],
+  },
+  {
+    icon: "📱",
+    title: "模块标题 B",
+    points: ["重要更新点1", "重要更新点2", "重要更新点3"],
+    details: [
+      { title: "重要更新点1详解", detail: "这里写本次修复或优化解决了什么问题。" },
+      { title: "重要更新点2详解", detail: "这里写对稳定性、体验或效率的具体影响。" },
+    ],
+  },
+];
+
+export const TOTAL_FRAMES = SCENE_DURATION * (1 + modules.length * 2);
+
+export const MainVideo: React.FC = () => {
   // Use one theme for all scenes by default.
   const useUnifiedTheme = true;
   const themePresets: ReleaseBackgroundTheme[] = [
@@ -26,7 +57,7 @@ export const MainVideo: React.FC = () => {
         fontFamily: '"PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif',
       }}
     >
-      <Sequence durationInFrames={sceneDuration}>
+      <Sequence durationInFrames={SCENE_DURATION}>
         <ReleaseCoverScene
           theme={pickTheme(0)}
           product="YourProduct"
@@ -39,45 +70,30 @@ export const MainVideo: React.FC = () => {
         />
       </Sequence>
 
-      <Sequence from={sceneDuration} durationInFrames={sceneDuration}>
-        <ReleaseSectionScene
-          theme={pickTheme(1)}
-          icon="🤖"
-          title="模块标题 A"
-          intro="先用一句话交代本次更新的核心变化和使用价值。"
-          items={["关键点1（最重要）", "关键点2（次重要）"]}
-        />
-      </Sequence>
-
-      <Sequence from={sceneDuration * 2} durationInFrames={sceneDuration}>
-        <ReleaseSectionScene
-          theme={pickTheme(2)}
-          icon="📱"
-          title="模块标题 B"
-          intro="这一页聚焦 1-2 个最值得用户感知的改动。"
-          items={["关键点1（最重要）", "关键点2（次重要）"]}
-        />
-      </Sequence>
-
-      <Sequence from={sceneDuration * 3} durationInFrames={sceneDuration}>
-        <ReleaseSectionScene
-          theme={pickTheme(3)}
-          icon="🔗"
-          title="模块标题 C"
-          intro="解释改动影响范围：谁受益、在哪些场景更明显。"
-          items={["关键点1（最重要）", "关键点2（次重要）"]}
-        />
-      </Sequence>
-
-      <Sequence from={sceneDuration * 4} durationInFrames={sceneDuration}>
-        <ReleaseSectionScene
-          theme={pickTheme(4)}
-          icon="⚙️"
-          title="模块标题 D"
-          intro="最后一页强调稳定性/兼容性/升级提示中的关键 1-2 点。"
-          items={["关键点1（最重要）", "关键点2（次重要）"]}
-        />
-      </Sequence>
+      {modules.map((module, index) => {
+        const summaryFrom = SCENE_DURATION * (1 + index * 2);
+        const detailFrom = SCENE_DURATION * (2 + index * 2);
+        return (
+          <React.Fragment key={module.title}>
+            <Sequence from={summaryFrom} durationInFrames={SCENE_DURATION}>
+              <ReleaseSectionScene
+                theme={pickTheme(index + 1)}
+                icon={module.icon}
+                title={module.title}
+                items={module.points}
+              />
+            </Sequence>
+            <Sequence from={detailFrom} durationInFrames={SCENE_DURATION}>
+              <ReleaseDetailScene
+                theme={pickTheme(index + 1)}
+                icon={module.icon}
+                title={`${module.title} · 重点详解`}
+                details={module.details}
+              />
+            </Sequence>
+          </React.Fragment>
+        );
+      })}
     </AbsoluteFill>
   );
 };

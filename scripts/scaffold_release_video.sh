@@ -81,6 +81,7 @@ copy_file "$TEMPLATE_DIR/MainVideo.tsx" "$PROJECT/src/MainVideo.tsx"
 copy_file "$TEMPLATE_DIR/scenes/ReleaseLayout.tsx" "$PROJECT/src/scenes/ReleaseLayout.tsx"
 copy_file "$TEMPLATE_DIR/scenes/ReleaseCoverScene.tsx" "$PROJECT/src/scenes/ReleaseCoverScene.tsx"
 copy_file "$TEMPLATE_DIR/scenes/ReleaseSectionScene.tsx" "$PROJECT/src/scenes/ReleaseSectionScene.tsx"
+copy_file "$TEMPLATE_DIR/scenes/ReleaseDetailScene.tsx" "$PROJECT/src/scenes/ReleaseDetailScene.tsx"
 
 echo ""
 echo "Template applied."
