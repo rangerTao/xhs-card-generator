@@ -10,10 +10,11 @@
 - Prefer premium gradient backgrounds with subtle glow layers.
 - Default strategy: one unified palette across the full video.
 - Optional strategy: rotate themes per scene if user asks.
-- Keep section card style consistent: icon, title, divider, 3-5 bullet rows.
+- Keep section card style consistent: icon, title, intro sentence, divider, 1-2 key bullet rows.
 
 ## Typography
 - Prioritize mobile readability (large type + clear line-height).
+- Each update point should first explain context in one sentence, then show 1-2 most important points.
 - Section bullets should use rounded mini-card rows, not dense raw lists.
 - Mixed English tokens in Chinese lines can be highlighted for scannability.
 

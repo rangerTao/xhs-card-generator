@@ -5,6 +5,7 @@
 - 版本更新短视频（Remotion 风格）
 - URL 内容提取（通过 Chrome DevTools Protocol, CDP）
 - 已内置 `remotion-9x16-release` 全量模板与规则（已合并到本 skill）
+- 视频页默认按“每个更新点 = 1句介绍 + 1-2个关键点”组织内容
 
 ## 能力概览
 

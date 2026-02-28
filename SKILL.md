@@ -39,6 +39,9 @@ See `references/playwright_extraction.md` for details.
 - Optional: 3-5 step list/checklist for procedural content.
 - Identify 1-2 quotable highlights for emphasis.
 - Keep each page focused on one idea; avoid dense paragraphs.
+- For video pages, each update point must include:
+- one short intro sentence (what changed + why it matters)
+- 1-2 most important points only (avoid long bullet lists)
 
 See `references/content_outline.md`.
 
@@ -102,8 +105,9 @@ npx remotion render src/index.ts ReleaseVideo9x16 dist/output.mp4 --codec=h264 -
 4. Use consistent scene grammar:
 - icon
 - title
+- intro sentence
 - divider line
-- 3-5 bullet items
+- 1-2 key bullet items
 5. Bullet typography should be mobile-readable:
 - rounded mini-card rows
 - adequate line-height and spacing
@@ -113,10 +117,10 @@ npx remotion render src/index.ts ReleaseVideo9x16 dist/output.mp4 --codec=h264 -
 
 ### Default Scene Pattern
 1. Cover: product name + version + 2-3 highlight cards
-2. Section A
-3. Section B
-4. Section C
-5. Section D
+2. Section A (intro + top 1-2 points)
+3. Section B (intro + top 1-2 points)
+4. Section C (intro + top 1-2 points)
+5. Section D (intro + top 1-2 points)
 
 If content is shorter, reduce to 3-4 scenes but keep same pattern.
 

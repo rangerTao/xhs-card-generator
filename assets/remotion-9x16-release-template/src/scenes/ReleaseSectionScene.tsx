@@ -5,6 +5,7 @@ import { ReleaseBackgroundTheme, ReleaseLayout } from "./ReleaseLayout";
 type ReleaseSectionSceneProps = {
   icon: string;
   title: string;
+  intro?: string;
   items: string[];
   theme?: ReleaseBackgroundTheme;
 };
@@ -24,9 +25,16 @@ const highlightMixedText = (text: string) => {
   });
 };
 
-export const ReleaseSectionScene: React.FC<ReleaseSectionSceneProps> = ({ icon, title, items, theme }) => {
+export const ReleaseSectionScene: React.FC<ReleaseSectionSceneProps> = ({
+  icon,
+  title,
+  intro,
+  items,
+  theme,
+}) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
+  const majorItems = items.slice(0, 2);
 
   const enter = spring({
     frame,
@@ -81,8 +89,27 @@ export const ReleaseSectionScene: React.FC<ReleaseSectionSceneProps> = ({ icon, 
             }}
           />
 
+          {intro ? (
+            <div
+              style={{
+                width: "100%",
+                fontSize: 36,
+                lineHeight: 1.4,
+                color: "#5A1E1E",
+                fontWeight: 600,
+                marginBottom: 24,
+                padding: "16px 20px",
+                borderRadius: 20,
+                background: "rgba(182, 26, 26, 0.08)",
+                border: "1px solid rgba(182, 26, 26, 0.2)",
+              }}
+            >
+              {intro}
+            </div>
+          ) : null}
+
           <div style={{ width: "100%", display: "flex", flexDirection: "column", gap: 18 }}>
-            {items.map((item) => (
+            {majorItems.map((item) => (
               <div
                 key={item}
                 style={{

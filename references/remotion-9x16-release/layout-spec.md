@@ -35,7 +35,8 @@
 - Use bold sans-serif CJK-friendly stack.
 - Cover main title: very large and heavy.
 - Section title: prominent, single line preferred.
-- Bullet text: 3-5 lines max, one idea per line.
+- Each section should include one short intro sentence below title.
+- Bullet text: keep only 1-2 most important points per section.
 
 ## Motion
 
