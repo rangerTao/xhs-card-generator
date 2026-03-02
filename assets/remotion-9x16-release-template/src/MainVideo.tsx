@@ -20,8 +20,9 @@ const modules: ModuleData[] = [
     title: "模块标题 A",
     points: ["重要更新点1", "重要更新点2", "重要更新点3"],
     details: [
-      { title: "重要更新点1详解", detail: "这里写变更背景、核心能力和用户收益。" },
-      { title: "重要更新点2详解", detail: "这里写适用场景、使用方式或性能提升幅度。" },
+      { title: "主要内容讲解 1", detail: "这里写变更背景、核心能力和用户收益。" },
+      { title: "主要内容讲解 2", detail: "这里写适用场景、使用方式或性能提升幅度。" },
+      { title: "主要内容讲解 3", detail: "这里写上线影响范围、迁移建议或注意事项。" },
     ],
   },
   {
@@ -29,8 +30,9 @@ const modules: ModuleData[] = [
     title: "模块标题 B",
     points: ["重要更新点1", "重要更新点2", "重要更新点3"],
     details: [
-      { title: "重要更新点1详解", detail: "这里写本次修复或优化解决了什么问题。" },
-      { title: "重要更新点2详解", detail: "这里写对稳定性、体验或效率的具体影响。" },
+      { title: "主要内容讲解 1", detail: "这里写本次修复或优化解决了什么问题。" },
+      { title: "主要内容讲解 2", detail: "这里写对稳定性、体验或效率的具体影响。" },
+      { title: "主要内容讲解 3", detail: "这里写推荐的实践方式与验收标准。" },
     ],
   },
 ];
@@ -38,7 +40,6 @@ const modules: ModuleData[] = [
 export const TOTAL_FRAMES = SCENE_DURATION * (1 + modules.length * 2);
 
 export const MainVideo: React.FC = () => {
-  // Use one theme for all scenes by default.
   const useUnifiedTheme = true;
   const themePresets: ReleaseBackgroundTheme[] = [
     { start: "#8E1010", end: "#420506", glowA: "#F1B74A", glowB: "#DC5A76" },
@@ -87,7 +88,7 @@ export const MainVideo: React.FC = () => {
               <ReleaseDetailScene
                 theme={pickTheme(index + 1)}
                 icon={module.icon}
-                title={`${module.title} · 重点详解`}
+                title={`${module.title} · 主要内容详解`}
                 details={module.details}
               />
             </Sequence>

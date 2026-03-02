@@ -18,6 +18,12 @@ export const ReleaseDetailScene: React.FC<ReleaseDetailSceneProps> = ({ icon, ti
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
+  const normalizedDetails =
+    details.length > 0
+      ? details
+      : [{ title: "暂无主要内容", detail: "请在 MainVideo.tsx 中补充该模块的主要讲解点。" }];
+  const denseMode = normalizedDetails.length >= 4;
+
   const enter = spring({
     frame,
     fps,
@@ -38,7 +44,7 @@ export const ReleaseDetailScene: React.FC<ReleaseDetailSceneProps> = ({ icon, ti
             minHeight: 1160,
             backgroundColor: "#F3EEEE",
             borderRadius: 56,
-            padding: "76px 72px 82px",
+            padding: denseMode ? "64px 64px 74px" : "76px 72px 82px",
             boxSizing: "border-box",
             transform: `translateY(${interpolate(enter, [0, 1], [28, 0])}px)`,
             display: "flex",
@@ -50,7 +56,7 @@ export const ReleaseDetailScene: React.FC<ReleaseDetailSceneProps> = ({ icon, ti
 
           <div
             style={{
-              fontSize: 60,
+              fontSize: denseMode ? 54 : 60,
               fontWeight: 900,
               color: "#A80000",
               lineHeight: 1.12,
@@ -67,26 +73,41 @@ export const ReleaseDetailScene: React.FC<ReleaseDetailSceneProps> = ({ icon, ti
               backgroundColor: "#B61A1A",
               borderRadius: 999,
               marginTop: 20,
-              marginBottom: 36,
+              marginBottom: denseMode ? 28 : 36,
             }}
           />
 
-          <div style={{ width: "100%", display: "flex", flexDirection: "column", gap: 18 }}>
-            {details.slice(0, 2).map((item) => (
+          <div style={{ width: "100%", display: "flex", flexDirection: "column", gap: denseMode ? 14 : 18 }}>
+            {normalizedDetails.map((item) => (
               <div
                 key={item.title}
                 style={{
                   borderRadius: 24,
-                  padding: "20px 22px",
+                  padding: denseMode ? "16px 18px" : "20px 22px",
                   background: "linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,255,255,0.8))",
                   border: "2px solid rgba(182, 26, 26, 0.14)",
                   boxShadow: "0 8px 18px rgba(0,0,0,0.06)",
                 }}
               >
-                <div style={{ fontSize: 42, fontWeight: 800, color: "#8F0E0E", lineHeight: 1.2 }}>
+                <div
+                  style={{
+                    fontSize: denseMode ? 34 : 42,
+                    fontWeight: 800,
+                    color: "#8F0E0E",
+                    lineHeight: 1.2,
+                  }}
+                >
                   {item.title}
                 </div>
-                <div style={{ fontSize: 34, fontWeight: 600, color: "#2F2F2F", lineHeight: 1.35, marginTop: 10 }}>
+                <div
+                  style={{
+                    fontSize: denseMode ? 28 : 34,
+                    fontWeight: 600,
+                    color: "#2F2F2F",
+                    lineHeight: denseMode ? 1.28 : 1.35,
+                    marginTop: 10,
+                  }}
+                >
                   {item.detail}
                 </div>
               </div>

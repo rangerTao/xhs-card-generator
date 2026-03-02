@@ -36,7 +36,7 @@
 - Cover main title: very large and heavy.
 - Section title: prominent, single line preferred.
 - Summary scene: module title + important points list (N).
-- Detail scene: only top 2 points with short explanations.
+- Detail scene: explain major content points with short explanations (recommended 2-4, no hard limit).
 
 ## Motion
 
@@ -53,5 +53,6 @@
 
 ## Default Timing
 
-- 5 scenes x 120 frames = 600 frames (~20s).
+- Duration scales by modules: cover + each module summary/detail pair.
+- Example: 2 modules => 5 scenes x 120 frames = 600 frames (~20s).
 - Each scene keeps similar pacing for predictable rhythm.

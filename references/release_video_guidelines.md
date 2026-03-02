@@ -12,7 +12,7 @@
 - Optional strategy: rotate themes per scene if user asks.
 - Keep module scene style consistent:
 - summary scene: icon, module title, important points list (N)
-- detail scene: top 2 points with short explanations
+- detail scene: explain major content points (recommended 2-4, no hard limit)
 
 ## Typography
 - Prioritize mobile readability (large type + clear line-height).

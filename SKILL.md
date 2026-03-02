@@ -41,7 +41,7 @@ See `references/playwright_extraction.md` for details.
 - Keep each page focused on one idea; avoid dense paragraphs.
 - For video modules, use a two-step narrative:
 - scene 1: module title + important points list (`重要更新点1..N`)
-- scene 2: top points detail (`重要更新点1详解`, `重要更新点2详解`)
+- scene 2: major content explanation list (`主要内容讲解1..N`)
 
 See `references/content_outline.md`.
 
@@ -108,8 +108,8 @@ npx remotion render src/index.ts ReleaseVideo9x16 dist/output.mp4 --codec=h264 -
 - divider line
 - important points list (N items)
 5. Add a follow-up detail scene for the same module:
-- detail card 1: 重要更新点1详解
-- detail card 2: 重要更新点2详解
+- detail scene title: 模块标题 · 主要内容详解
+- detail items: 按主要内容讲解（建议 2-4 条，可按素材增减）
 6. Bullet typography should be mobile-readable:
 - rounded mini-card rows
 - adequate line-height and spacing
@@ -120,9 +120,9 @@ npx remotion render src/index.ts ReleaseVideo9x16 dist/output.mp4 --codec=h264 -
 ### Default Scene Pattern
 1. Cover: product name + version + 2-3 highlight cards
 2. Section A summary: 模块标题 + 重要更新点1..N
-3. Section A detail: 重要更新点1详解 + 重要更新点2详解
+3. Section A detail: 模块 A 主要内容详解（按素材条数展示）
 4. Section B summary: 模块标题 + 重要更新点1..N
-5. Section B detail: 重要更新点1详解 + 重要更新点2详解
+5. Section B detail: 模块 B 主要内容详解（按素材条数展示）
 
 If content is shorter, keep the same "summary -> detail" pair pattern and reduce module count.
 
